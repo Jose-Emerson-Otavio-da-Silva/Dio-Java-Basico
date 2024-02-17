@@ -2,7 +2,7 @@ package Menu;
 
 import Dispositivo.Iphone;
 
-public class Interface {
+public class Menu {
     public static void main(String[] args) {
         Iphone iphone = new Iphone();
 
