@@ -6,6 +6,7 @@ import one.digitalinovation.laboojava.entidade.Pedido;
 import one.digitalinovation.laboojava.entidade.Produto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -108,6 +109,39 @@ public class PedidoNegocio {
     /**
      * Lista todos os pedidos realizados.
      */
-    // TODO Método de listar todos os pedidos
+    public void listarTodos() {
+        if (bancoDados.getPedidos().length == 0) {
+            System.out.println("Não existem pedidos cadastrados");
+        } else {
+            for (Pedido pedido : bancoDados.getPedidos()) {
+                System.out.println(pedido.toString());
+            }
+        }
+    }
+
+    /**
+     * Lista os Pedido por codigo.
+     * 
+     * @param codigoPedido do pedido cadastrado
+     */
+    public void listarPorCodigo(String codigoPedido) {
+        Pedido[] pedidos = bancoDados.getPedidos();
+        List<Pedido> pedidosEncontrados = new ArrayList<>();
+
+        for (Pedido pedido : pedidos) {
+            if (pedido.getCodigo().equals(codigoPedido)) {
+                pedidosEncontrados.add(pedido);
+            }
+        }
+
+        if (pedidosEncontrados.isEmpty()) {
+            System.out.println("Nenhum pedido encontrado com o codigo informado.");
+        } else {
+            System.out.println("Pedidos encontrados com o codigo: " + codigoPedido + "':");
+            for (Pedido pedido : pedidosEncontrados) {
+                System.out.println(pedido.toString());
+            }
+        }
+    };
 
 }
