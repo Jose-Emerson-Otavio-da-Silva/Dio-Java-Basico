@@ -164,7 +164,7 @@ public class Main {
         System.out.println("Digite o cpf do cliente");
         String cpf = lerDado();
 
-        Cliente cliente = getClienteCpf(cpf);
+        Cliente cliente = buscarClienteCpf(cpf);
 
         System.out.println("Digite P para conta poupança ou C para conta corrente.");
         String tipoConta = lerDado().toUpperCase();
@@ -196,7 +196,7 @@ public class Main {
      * @param cpf
      * @return Cliente
      */
-    private static Cliente getClienteCpf(String cpf) {
+    private static Cliente buscarClienteCpf(String cpf) {
 
         Cliente cliente = null;
 
