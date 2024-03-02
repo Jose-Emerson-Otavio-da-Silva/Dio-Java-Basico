@@ -6,9 +6,7 @@ import java.util.Scanner;
 public class Main {
 
     private static DataBase dataBase = new DataBase();
-    private static Cliente cliente = new Cliente();
-    private static ContaCorrente contaCorrente = new ContaCorrente(cliente);
-    private static ContaPoupanca contaPoupança = new ContaPoupanca(cliente);
+
     /**
      * Classe do Java para manipular entradas via teclado.
      */
@@ -25,80 +23,95 @@ public class Main {
         System.out.println("Bem vindo.");
 
         String opcao = "";
+        System.out.println("");
 
         while (true) {
 
             System.out.println("Selecione uma opção:");
-
-            System.out.println("1 - Cadastrar Cliente");
-            System.out.println("2 - Excluir Cliente");
-            System.out.println("3 - Consultar Cliente por CPF");
-
-            System.out.println("4 - Cadastrar Conta");
-            System.out.println("5 - Excluir Conta");
-            System.out.println("6 - Consultar Conta por Numero");
-            System.out.println("7 - Consultar Conta por Cpf");
-
-            System.out.println("8 - Listar Clientes");
-            System.out.println("9 - Listar Contas");
-            System.out.println("10 - Listar Contas Poupança");
-            System.out.println("11 - Listar Contas Correntes");
-
-            System.out.println("13 - Sair");
+            System.out.println("");
+            System.out.println("1 - Depositar");
+            System.out.println("2 - Sacar");
+            System.out.println("3 - Transferir");
+            System.out.println("");
+            System.out.println("5 - Cadastrar Cliente");
+            System.out.println("6 - Excluir Cliente");
+            System.out.println("");
+            System.out.println("7 - Cadastrar Conta");
+            System.out.println("8 - Excluir Conta");
+            System.out.println("");
+            System.out.println("9 - Listar Todos Clientes");
+            System.out.println("10 - Consultar Cliente por CPF");
+            System.out.println("");
+            System.out.println("11 - Listar Todas  Contas");
+            System.out.println("12 - Listar Contas Poupança");
+            System.out.println("13 - Listar Contas Correntes");
+            System.out.println("14 - Consultar Conta por Numero");
+            System.out.println("15 - Consultar Conta por Cpf");
+            System.out.println("");
+            System.out.println("20 - Sair");
 
             opcao = lerDado();
 
             switch (opcao) {
-                case "1": // Cadastrar Cliente
+                case "1": // Depositar
+                    depositar();
+                    break;
+                case "2": // Sacar
+                    sacar();
+                    break;
+                case "3": // Transferir
+                    transferir();
+                    break;
+                case "5": // Cadastrar Cliente
                     Cliente cliente = lerCliente();
                     dataBase.salvarCliente(cliente);
                     break;
-                case "2": // Excluir Cliente
+                case "6": // Excluir Cliente
                     System.out.println("Digite o cpf do cliente");
                     String cpfCliente = lerDado();
                     dataBase.excluirCliente(cpfCliente);
                     break;
-                case "3":// Consultar cliente por cpf
-                    System.out.println("Digite o cpf do cliente.");
-                    cpfCliente = lerDado();
-                    dataBase.listarClintePorCpf(cpfCliente);
-                    break;
-                case "4": // Cadastrar Conta
+                case "7": // Cadastrar Conta
                     Conta conta = lerConta();
                     dataBase.salvarConta(conta);
                     break;
-                case "5": // Excluir Conta
+                case "8": // Excluir Conta
                     System.out.println("Digite o numero da conta");
                     String codigoConta = lerDado();
                     dataBase.excluirConta(Integer.parseInt(codigoConta));
                     break;
-                case "6":// Consultar conta por numero
+                case "9": // Listar clientes
+                    System.out.println("Lista de cliente:");
+                    dataBase.listarTodosClientes();
+                    break;
+                case "10":// Consultar cliente por cpf
+                    System.out.println("Digite o cpf do cliente.");
+                    cpfCliente = lerDado();
+                    dataBase.listarClintePorCpf(cpfCliente);
+                    break;
+                case "11": // Listar contas
+                    System.out.println("Lista de contas:");
+                    dataBase.listarTodasContas();
+                    break;
+                case "12": // Listar contas poupanca
+                    System.out.println("Lista de contas poupança:");
+                    dataBase.listarTodasContasPoupanca();
+                    break;
+                case "13": // Listar contas correntes
+                    System.out.println("Lista de contas correntes:");
+                    dataBase.listarTodasContasCorrente();
+                    break;
+                case "14":// Consultar conta por numero
                     System.out.println("Digite numero da conta.");
                     codigoConta = lerDado();
                     dataBase.listarContaPorNumero(Integer.parseInt(codigoConta));
                     break;
-                case "7": // Consultar conta por cpf
+                case "15": // Consultar conta por cpf
                     System.out.println("Digite cpf dp titular da conta.");
                     cpfCliente = lerDado();
                     dataBase.listarContasPorCpf(cpfCliente);
                     break;
-                case "8": // Listar cliente
-                    System.out.println("Lista de cliente:");
-                    dataBase.listarTodosClientes();
-                    break;
-                case "9": // Listar contas
-                    System.out.println("Lista de contas:");
-                    dataBase.listarTodasContas();
-                    break;
-                case "10": // Listar contas
-                    System.out.println("Lista de contas poupança:");
-                    dataBase.listarTodasContasPoupanca();
-                    break;
-                case "11": // Listar contas
-                    System.out.println("Lista de contas correntes:");
-                    dataBase.listarTodasContasCorrente();
-                    break;
-                case "13":
+                case "20":
                     System.out.println("Aplicação encerrada.");
                     System.exit(0);
                     break;
@@ -111,6 +124,7 @@ public class Main {
     }
 
     // Métodos auxiliares
+
     /**
      * Ler um dado específico
      */
@@ -158,13 +172,19 @@ public class Main {
     public static Conta lerConta() {
 
         Conta conta = null;
+        Cliente cliente = null;
 
         System.out.println("Cadastrando nova conta...");
 
-        System.out.println("Digite o cpf do cliente");
-        String cpf = lerDado();
+        while (cliente == null) {
+            System.out.println("Digite o cpf do cliente");
+            String cpf = lerDado();
 
-        Cliente cliente = buscarClienteCpf(cpf);
+            cliente = buscarClienteCpf(cpf);
+            if (cliente == null) {
+                System.out.println("Não existe nenhum cliente com esse cpf.");
+            }
+        }
 
         System.out.println("Digite P para conta poupança ou C para conta corrente.");
         String tipoConta = lerDado().toUpperCase();
@@ -193,6 +213,86 @@ public class Main {
     }
 
     /**
+     * Método que lê os dados e realiza o deposito
+     */
+    public static void depositar() {
+        Conta conta = null;
+
+        while (conta == null) {
+            System.out.println("Digite o numero da conta");
+            int numeroConta = Integer.parseInt(lerDado());
+
+            conta = buscarContaPorNumero(numeroConta);
+            if (conta == null) {
+                System.out.println("Não existe nenhuma conta com numero informado.");
+            }
+        }
+
+        System.out.println("Digite valor que deseja depositar.");
+        Double valorDepositar = Double.parseDouble(lerDado());
+        conta.depositar(valorDepositar);
+
+        System.out.println("Depósito realizado com sucesso.");
+        System.out.println(conta.toString());
+    }
+
+    /**
+     * Método que lê os dados e realiza o saque
+     */
+    public static void sacar() {
+        Conta conta = null;
+
+        while (conta == null) {
+            System.out.println("Digite o numero da conta");
+            int numeroConta = Integer.parseInt(lerDado());
+
+            conta = buscarContaPorNumero(numeroConta);
+            if (conta == null) {
+                System.out.println("Não existe nenhuma conta com numero informado.");
+            }
+        }
+
+        System.out.println("Digite valor que deseja sacar.");
+        Double valorSacar = Double.parseDouble(lerDado());
+        conta.sacar(valorSacar);
+
+        System.out.println("Saque realizado com sucesso.");
+        System.out.println(conta.toString());
+    }
+
+    /**
+     * Método que lê os dados e realiza o transferencia
+     */
+    public static void transferir() {
+        Conta contaOrigem = null;
+        Conta contaDestino = null;
+
+        while ((contaOrigem == null) || (contaDestino == null)) {
+            System.out.println("Digite o numero da conta de origem");
+            int numeroContaOrigem = Integer.parseInt(lerDado());
+
+            System.out.println("Digite o numero da conta de destino");
+            int numeroContaDestino = Integer.parseInt(lerDado());
+
+            contaOrigem = buscarContaPorNumero(numeroContaOrigem);
+            if (contaOrigem == null) {
+                System.out.println("Conta de origem informada não existe.");
+            }
+
+            contaDestino = buscarContaPorNumero(numeroContaDestino);
+            if (contaDestino == null) {
+                System.out.println("Conta de destino informada não existe.");
+            }
+        }
+
+        System.out.println("Digite valor que deseja transferir.");
+        Double valorTransferir = Double.parseDouble(lerDado());
+        contaOrigem.transferir(valorTransferir, contaDestino);
+
+        System.out.println("Transferencia realizada com sucesso.");
+    }
+
+    /**
      * @param cpf
      * @return Cliente
      */
@@ -209,5 +309,24 @@ public class Main {
             }
         }
         return cliente;
+    }
+
+    /**
+     * @param numero
+     * @return Conta
+     */
+    private static Conta buscarContaPorNumero(int numero) {
+
+        Conta conta = null;
+
+        for (int i = 0; i < dataBase.getContas().length; i++) {
+
+            Conta contaTemporaria = dataBase.getContas()[i];
+            if (contaTemporaria.getNumero() == numero) {
+                conta = contaTemporaria;
+                break;
+            }
+        }
+        return conta;
     }
 }
