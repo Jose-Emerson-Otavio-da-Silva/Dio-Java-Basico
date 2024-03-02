@@ -80,7 +80,7 @@ public class Main {
                 case "7": // Consultar conta por cpf
                     System.out.println("Digite cpf dp titular da conta.");
                     cpfCliente = lerDado();
-                    dataBase.listarClintePorCpf(cpfCliente);
+                    dataBase.listarContasPorCpf(cpfCliente);
                     break;
                 case "8": // Listar cliente
                     System.out.println("Lista de cliente:");

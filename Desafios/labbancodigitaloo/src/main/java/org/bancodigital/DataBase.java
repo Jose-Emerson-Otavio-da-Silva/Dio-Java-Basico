@@ -55,7 +55,7 @@ public class DataBase {
 
             Cliente cliente = getClientes()[i];
             if (cliente.getCpf().equals(cpf)) {
-                cliente.toString();
+                System.out.println(cliente.toString());
             } else {
                 System.out.println("Nenhum cliente encontrado com o cpf informado.");
             }
@@ -132,7 +132,7 @@ public class DataBase {
 
             Conta conta = getContas()[i];
             if (conta.getNumero() == numero) {
-                conta.toString();
+                System.out.println(conta.toString());
             } else {
                 System.out.println("Nenhuma conta encontrada com o numero informado.");
             }
@@ -151,13 +151,13 @@ public class DataBase {
 
         for (Conta conta : contas) {
 
-            if (conta.getCliente().getCpf() == cpf) {
+            if (conta.getCliente().getCpf().equals(cpf)) {
                 contasEncontradas.add(conta);
             }
         }
 
         if (contasEncontradas.isEmpty()) {
-            System.out.println("Nao encontrado nenhum conta com o cpf informado.");
+            System.out.println("Nao encontrado nenhuma conta com o cpf informado.");
         } else {
             System.out.println("Contas encontradas com cpf: " +
                     cpf + "':");
