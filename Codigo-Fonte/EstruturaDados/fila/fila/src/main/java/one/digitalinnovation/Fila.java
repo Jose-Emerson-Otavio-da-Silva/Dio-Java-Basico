@@ -12,7 +12,7 @@ public class Fila {
         refNoEntradaFila = novoNo;
     }
 
-    public NO first() {
+    public No first() {
         if (!this.isEmpty()) {
             No primeiroNo = refNoEntradaFila;
             while (true) {
@@ -22,11 +22,12 @@ public class Fila {
                     break;
                 }
             }
+            return primeiroNo;
         }
         return null;
     }
 
-    public NO dequeue() {
+    public No dequeue() {
         if (!this.isEmpty()) {
             No primeiroNo = refNoEntradaFila;
             No noAuxiliar = refNoEntradaFila;
