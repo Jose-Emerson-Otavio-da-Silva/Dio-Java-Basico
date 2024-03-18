@@ -2,12 +2,12 @@ package one.digitalinnovation;
 
 public class Main {
     public static void main(String[] args) {
-        Fila minhFila = new Fila();
+        Fila<String> minhFila = new Fila<>();
 
-        minhFila.enqueue(new No("primeiro"));
-        minhFila.enqueue(new No("segundo"));
-        minhFila.enqueue(new No("terceiro"));
-        minhFila.enqueue(new No("quarto"));
+        minhFila.enqueue("primeiro");
+        minhFila.enqueue("segundo");
+        minhFila.enqueue("terceiro");
+        minhFila.enqueue("quarto");
 
         System.out.println(minhFila);
 
@@ -15,7 +15,7 @@ public class Main {
 
         System.out.println(minhFila);
 
-        minhFila.enqueue(new No("ultimo"));
+        minhFila.enqueue("ultimo");
 
         System.out.println(minhFila);
 
